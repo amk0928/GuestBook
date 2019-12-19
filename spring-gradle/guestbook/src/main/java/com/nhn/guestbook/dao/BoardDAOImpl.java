@@ -17,5 +17,15 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardDto> getBoard() {
 		return sqlSession.selectList("BoardMapper.getBoard");
 	}
+	
+	@Override
+	public void insertBaord(BoardDto boardDto) {
+		sqlSession.insert("BoardMapper.insertBoard", boardDto);
+	}
+	
+	@Override
+	public void deleteBoard(BoardDto boardDto) {
+		sqlSession.delete("BoardMapper.deleteBoard", boardDto);
+	}
 
 }

@@ -1,21 +1,20 @@
-<%@ page import="com.nhn.guestbook.model.Board" %>
+<%@ page import="com.nhn.guestbook.dto.BoardDto" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
 <!DOCTYPE html> 
 <html> 
 <head> 
-	<meta charset="EUC-KR"> 
+	<meta charset="UTF-8"> 
 	<title>Insert title here</title> 
 </head> 
 <body> 
 	<h1>방명록</h1> 
-	<form action="/" method="POST">
-		<p>이메일 : <input type="text" name="email"/></p>
-		<p>비밀번호 : <input type="password" name="password"/></p>
-		<p>본문 : <textarea name="content" cols="30" row="5"></textarea></p>
-		<input type="submit" value="메시지 남기기"/>
+	<form id="insertForm" action="/" method="POST" >
+		<p>이메일 : <input type="text" id="email"/> 비밀번호 : <input type="password" id="password"/></p>
+		<p>본문 : <textarea id="content" cols="100" rows="5"></textarea></p>
 	</form>
+	<input type="button" onclick="insertBoard()" value="방명록 남기기"/>
 	
 	<h4> 목록 </h4>
 	<table>
@@ -23,21 +22,27 @@
 			<tr>
 				<th>본문</th>
 				<th>이메일</th>
+				<th>수정</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% 
-				List<Map<String, Object>> boards = (List<Map<String, Object>>) request.getAttribute("boards");
-				for(Map<String, Object> board : boards) {
+				List<BoardDto> boards = (List<BoardDto>) request.getAttribute("boards");
+				for(BoardDto board : boards) {
 			%>
 			<tr>
-				<td><%= board.get("content") %></td>
-				<td><%= board.get("email") %></td>
+				<td><%= board.getContent() %></td>
+				<td><%= board.getEmail() %></td>
+				<td><input type="button"  value="수정"></td>
+				<td><input type="button" onClick="deleteBoard(<%= board.getId() %>)" value="삭제"></td>
 			</tr>
 			<%
 				}
 			%>
 		</tbody>
 	</table>
-</body> 
+</body>
+<script src='resources/js/jquery-3.4.1.min.js' charset="utf-8"></script>
+<script src='resources/js/board.js' charset="utf-8"></script> 
 </html>
