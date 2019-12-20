@@ -8,6 +8,12 @@
         ORDER BY updatedAt DESC;
     </select>
     
+   <select id="getBoardWithID" parameterType="Integer" resultType="com.nhn.guestbook.dto.BoardDto">
+        SELECT * FROM BOARD
+        WHERE id = #{id}
+        ORDER BY updatedAt DESC;
+    </select>
+    
     <insert id="insertBoard">
     	INSERT INTO BOARD(email, password, content, createdAt, updatedAt, deleted) 
     	VALUES(#{email}, #{password}, #{content}, NOW(), NOW(), #{deleted})
@@ -21,7 +27,7 @@
     
    	<update id="updateBoard">
    		UPDATE BOARD
-   		SET content = #{content} AND updatedAt = NOW()
+   		SET content = #{content}, updatedAt = NOW()
    		WHERE id = #{id}
    	</update>
 </mapper>

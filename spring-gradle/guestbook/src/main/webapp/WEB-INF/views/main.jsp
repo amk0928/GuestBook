@@ -34,7 +34,7 @@
 			<tr>
 				<td><%= board.getContent() %></td>
 				<td><%= board.getEmail() %></td>
-				<td><input type="button"  value="수정"></td>
+				<td><input type="button" onClick="update(<%= board.getId() %>)"  value="수정"></td>
 				<td><input type="button" onClick="deleteBoard(<%= board.getId() %>)" value="삭제"></td>
 			</tr>
 			<%

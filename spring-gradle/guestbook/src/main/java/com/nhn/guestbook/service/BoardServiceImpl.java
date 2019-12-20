@@ -27,12 +27,25 @@ public class BoardServiceImpl implements BoardService {
 		return stream.collect(Collectors.toList());
 	}
 	
+	public BoardDto getBoardWithID(int boardId) {
+		return boardDAO.getBoardWithID(boardId);
+	}
+	
 	public void insertBoard(BoardDto boardDto) {
 		boardDAO.insertBaord(boardDto);
 	}
 	
 	public void deleteBoard(BoardDto boardDto) {
 		boardDAO.deleteBoard(boardDto);
+	}
+	
+	public BoardDto updateBoard(BoardDto boardDto) {
+		if (boardDAO.getBoardWithID(boardDto.getId()).getPassword().equals(boardDto.getPassword())) {
+			boardDAO.updateBoard(boardDto);
+			return boardDto;
+		} else {
+			return null;
+		}
 	}
 
 }

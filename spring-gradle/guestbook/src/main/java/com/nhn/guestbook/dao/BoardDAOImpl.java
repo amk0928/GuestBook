@@ -19,6 +19,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	@Override
+	public BoardDto getBoardWithID(int boardId) {
+		return sqlSession.selectOne("BoardMapper.getBoardWithID", boardId);
+	}
+	
+	@Override
 	public void insertBaord(BoardDto boardDto) {
 		sqlSession.insert("BoardMapper.insertBoard", boardDto);
 	}
@@ -28,4 +33,8 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete("BoardMapper.deleteBoard", boardDto);
 	}
 
+	@Override
+	public int updateBoard(BoardDto boardDto) {
+		return sqlSession.update("BoardMapper.updateBoard", boardDto);
+	}
 }
