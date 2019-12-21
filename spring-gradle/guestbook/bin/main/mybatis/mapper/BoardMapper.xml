@@ -14,7 +14,7 @@
         ORDER BY updatedAt DESC;
     </select>
     
-    <insert id="insertBoard">
+    <insert id="insertBoard" useGeneratedKeys="true" keyProperty="id">
     	INSERT INTO BOARD(email, password, content, createdAt, updatedAt, deleted) 
     	VALUES(#{email}, #{password}, #{content}, NOW(), NOW(), #{deleted})
     </insert>

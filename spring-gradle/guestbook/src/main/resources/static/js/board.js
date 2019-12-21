@@ -28,23 +28,24 @@ function insertBoard() {
 			password: password,
 			content: content
 	};
-	console.log(board);
-	$.ajax({
-		url: '/',
-		type: 'post',
-		data: JSON.stringify(board),
-		contentType: 'application/json; charset=UTF-8',
-		success: function(data) {
-			alert('방명록이 작성되었습니다.');
-			location.reload();
-		},
-		error : function(data) {
-			console.log(data);
-			alert("작성에 실패했습니다.")
-		}
-	})
-	
-	
+	if(checkEmail(email)) {
+		$.ajax({
+			url: '/',
+			type: 'post',
+			data: JSON.stringify(board),
+			contentType: 'application/json; charset=UTF-8',
+			success: function(data) {
+				alert('방명록이 작성되었습니다.');
+				location.reload();
+			},
+			error : function(data) {
+				console.log(data);
+				alert("작성에 실패했습니다.")
+			}
+		})
+	} else {
+		alert("이메일 형식이 올바르지 않습니다.")
+	}
 }
 
 function update(id) {
@@ -69,7 +70,7 @@ function updateBoard(id) {
 		contentType: 'application/json; charset=UTF-8',
 		success: function(data) {
 			alert('방명록이 수정되었습니다.');
-			location.reload();
+			$(location).attr('href', '/');
 		},
 		error : function(data) {
 			if(data.status == 401) {
@@ -81,4 +82,13 @@ function updateBoard(id) {
 			
 		}
 	})
+}
+
+function checkEmail(email) {
+	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    if (regExp.test(email)) return true;
+
+    else return false;
+
 }

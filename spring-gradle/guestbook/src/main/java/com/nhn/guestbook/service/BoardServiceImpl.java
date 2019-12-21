@@ -31,8 +31,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoardWithID(boardId);
 	}
 	
-	public void insertBoard(BoardDto boardDto) {
-		boardDAO.insertBaord(boardDto);
+	public int insertBoard(BoardDto boardDto) {
+		String emailReg = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
+		if(boardDto.getEmail().matches(emailReg)) {
+			boardDAO.insertBaord(boardDto);
+		} else {
+			return -1;
+		}
+		return boardDto.getId();
 	}
 	
 	public void deleteBoard(BoardDto boardDto) {

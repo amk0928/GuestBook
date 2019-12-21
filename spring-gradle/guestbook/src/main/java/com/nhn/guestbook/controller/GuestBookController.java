@@ -33,9 +33,11 @@ public class GuestBookController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public String insertBoard(
 			ModelMap modelMap,
-			@RequestBody BoardDto boardDto
+			@RequestBody BoardDto boardDto,
+			HttpServletResponse httpServletResponse
 			) {
-		boardService.insertBoard(boardDto);
+		if(boardService.insertBoard(boardDto) == -1)
+			httpServletResponse.setStatus(401);
 		modelMap.addAttribute("boards", boardService.getBoard());
 		return "main";
 	}

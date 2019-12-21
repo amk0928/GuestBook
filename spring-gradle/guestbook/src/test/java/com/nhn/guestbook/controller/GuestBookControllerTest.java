@@ -29,7 +29,32 @@ class GuestBookControllerTest {
 
 	@Test
 	void testInsertBoard() {
-		fail("Not yet implemented");
+		String testEmail ="test@test.com";
+		String testPassword = "test";
+		String testContent = "This is a test case";
+		BoardDto boardDto = new BoardDto();
+		boardDto.setEmail(testEmail);
+		boardDto.setPassword(testPassword);
+		boardDto.setContent(testContent);
+		
+		int id = boardService.insertBoard(boardDto);
+		
+		boardDto = boardService.getBoardWithID(id);
+		Assert.assertEquals(testEmail, boardDto.getEmail());
+		Assert.assertEquals(testPassword, boardDto.getPassword());
+		Assert.assertEquals(testContent, boardDto.getContent());
+		
+		
+		//email validation test case
+		
+		testEmail = "test";
+		boardDto = new BoardDto();
+		boardDto.setEmail(testEmail);
+		boardDto.setPassword(testPassword);
+		boardDto.setContent(testContent);
+		id = boardService.insertBoard(boardDto);
+		Assert.assertEquals(id, -1);
+		
 	}
 
 	@Test
