@@ -72,8 +72,13 @@ function updateBoard(id) {
 			location.reload();
 		},
 		error : function(data) {
-			console.log(data);
-			alert("작성에 실패했습니다.")
+			if(data.status == 401) {
+				alert("비밀번호가 틀렸습니다.")
+			} else {
+				alert("수정에 실패했습니다.")
+			}
+			console.log(data.status);
+			
 		}
 	})
 }
