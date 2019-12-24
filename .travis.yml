@@ -11,5 +11,9 @@ cache:
   directories:
     - '$HOME/spring-grable/guestbook/.gradle'
 
+
+before_install:
+  - chmod +x build.sh
+  
 # clean 후 Build (Build시 자동으로 test 수행)
 script: "./spring-gradle/guestbook/gradlew clean build"
