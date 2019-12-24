@@ -12,4 +12,4 @@ cache:
     - '$HOME/spring-grable/guestbook/.gradle'
 
 # clean 후 Build (Build시 자동으로 test 수행)
-script: "./gradlew clean build"
+script: "./spring-gradle/guestbook/gradlew clean build"
