@@ -4,30 +4,30 @@
 
 <mapper namespace="BoardMapper">
     <select id="getBoard" resultType="com.nhn.guestbook.dto.BoardDto">
-        SELECT * FROM BOARD
-        ORDER BY updatedAt DESC;
+        SELECT * FROM `BOARD`
+        ORDER BY `updatedAt` DESC;
     </select>
     
    <select id="getBoardWithID" parameterType="Integer" resultType="com.nhn.guestbook.dto.BoardDto">
-        SELECT * FROM BOARD
-        WHERE id = #{id}
-        ORDER BY updatedAt DESC;
+        SELECT * FROM `BOARD`
+        WHERE `id` = #{id}
+        ORDER BY `updatedAt` DESC;
     </select>
     
     <insert id="insertBoard" useGeneratedKeys="true" keyProperty="id">
-    	INSERT INTO BOARD(email, password, content, createdAt, updatedAt, deleted) 
+    	INSERT INTO `BOARD`(`email`, `password`, `content`, `createdAt`, `updatedAt`, `deleted`) 
     	VALUES(#{email}, #{password}, #{content}, NOW(), NOW(), #{deleted})
     </insert>
     
     <delete id="deleteBoard">
     	UPDATE BOARD
-   		SET deleted = 1
-   		WHERE id = #{id}
+   		SET `deleted` = 1
+   		WHERE `id` = #{id}
     </delete>
     
    	<update id="updateBoard">
    		UPDATE BOARD
-   		SET content = #{content}, updatedAt = NOW()
-   		WHERE id = #{id}
+   		SET `content` = #{content}, `updatedAt` = NOW()
+   		WHERE `id` = #{id}
    	</update>
 </mapper>

@@ -21,7 +21,7 @@ class GuestBookControllerTest {
 	@Test
 	void testInsertBoard() {
 		String testEmail ="test@test.com";
-		String testPassword = "test";
+		String testPassword = "1234";
 		String testContent = "This is a test case";
 		BoardDto boardDto = new BoardDto();
 		boardDto.setEmail(testEmail);
@@ -49,14 +49,6 @@ class GuestBookControllerTest {
 	}
 
 	@Test
-	void testDeleteBoard() {
-		BoardDto boardDto = new BoardDto();
-		boardDto.setId(1);
-		boardService.deleteBoard(boardDto);
-		Assert.assertEquals(boardService.getBoardWithID(boardDto.getId()).getDeleted(), 1, 0);
-	}
-
-	@Test
 	void testUpdateBoard() {
 		String changed = "changed board";
 		String testPassword = "1234";
@@ -70,6 +62,7 @@ class GuestBookControllerTest {
 		BoardDto updatedBoardDto = boardService.updateBoard(boardDto);
 		Assert.assertEquals(updatedBoardDto.getContent(), changed);
 		
+		testPassword = "qwer";
 		// if password is incorrect
 		boardDto = new BoardDto();
 		boardDto.setPassword(testPassword);
@@ -78,6 +71,14 @@ class GuestBookControllerTest {
 		updatedBoardDto = boardService.updateBoard(boardDto);
 		Assert.assertEquals(updatedBoardDto, null);
 		
+	}
+	
+	@Test
+	void testDeleteBoard() {
+		BoardDto boardDto = new BoardDto();
+		boardDto.setId(1);
+		boardService.deleteBoard(boardDto);
+		Assert.assertEquals(boardService.getBoardWithID(boardDto.getId()).getDeleted(), 1, 0);
 	}
 
 }
