@@ -6,6 +6,9 @@ branches:
   only:
     - devel
 
+services:
+  - mysql
+
 # Travis CI 서버의 Cache 활성화
 cache:
   directories:
@@ -14,6 +17,7 @@ cache:
 
 before_install:
   - chmod +x gradlew
+  - mysql -u root --password="" < config/travis.sql
 
 # clean 후 Build (Build시 자동으로 test 수행)
 script: "./gradlew clean build"
