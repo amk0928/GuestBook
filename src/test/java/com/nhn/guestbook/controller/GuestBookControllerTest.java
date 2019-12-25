@@ -58,10 +58,10 @@ class GuestBookControllerTest {
 
 	@Test
 	void testUpdateBoard() {
-		String changed = "변경된 방명록";
+		String changed = "changed board";
 		String testPassword = "1234";
 		int id = 1;
-		//비밀번호 맞은 경우 테스트
+		//if password is correct
 		BoardDto boardDto = new BoardDto();
 		String password = boardService.getBoardWithID(1).getPassword();
 		boardDto.setPassword(password);
@@ -70,7 +70,7 @@ class GuestBookControllerTest {
 		BoardDto updatedBoardDto = boardService.updateBoard(boardDto);
 		Assert.assertEquals(updatedBoardDto.getContent(), changed);
 		
-		// 비밀번호 틀린 경우 테스트
+		// if password is incorrect
 		boardDto = new BoardDto();
 		boardDto.setPassword(testPassword);
 		boardDto.setId(id);
