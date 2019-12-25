@@ -9,11 +9,11 @@ branches:
 # Travis CI 서버의 Cache 활성화
 cache:
   directories:
-    - '$HOME/spring-grable/guestbook/.gradle'
+    - '$HOME/.gradle'
 
 
 before_install:
-  - chmod +x spring-gradle/guestbook/gradlew
+  - chmod +x gradlew
 
 # clean 후 Build (Build시 자동으로 test 수행)
-script: "./spring-gradle/guestbook/gradlew clean build"
+script: "./gradlew clean build"
