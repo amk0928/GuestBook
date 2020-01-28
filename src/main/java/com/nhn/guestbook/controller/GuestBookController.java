@@ -1,6 +1,7 @@
 package com.nhn.guestbook.controller;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.nhn.guestbook.dto.BoardDto;
 import com.nhn.guestbook.service.BoardService;
@@ -30,14 +33,19 @@ public class GuestBookController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/", method=RequestMethod.POST)
+	@RequestMapping(value="/", method=RequestMethod.POST, consumes= {"multipart/form-data"})
 	public String insertBoard(
 			ModelMap modelMap,
-			@RequestBody BoardDto boardDto,
+			@RequestPart("board") @Valid BoardDto boardDto,
+			@RequestPart("files") @Valid MultipartFile[] files, 
 			HttpServletResponse httpServletResponse
 			) {
 		if(boardService.insertBoard(boardDto) == -1)
 			httpServletResponse.setStatus(401);
+		System.out.println(files.length);
+		for(int i=0; i < files.length; i++) {
+			System.out.println(files[i].getOriginalFilename());
+		}
 		modelMap.addAttribute("boards", boardService.getBoard());
 		return "main";
 	}

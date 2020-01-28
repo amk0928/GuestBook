@@ -6,7 +6,18 @@
 <html> 
 <head> 
 	<meta charset="UTF-8"> 
-	<title>Insert title here</title> 
+	<title>Insert title here</title>
+	
+	<!-- tui editor -->
+	<!-- Styles -->
+	<link rel="stylesheet" href="/resources/css/tui-editor.css"></link>
+	<link rel="stylesheet" href="/resources/css/tui-editor-contents.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"></link>
+	<!-- Scripts -->
+	<script src="/resources/js/tui-editor-Editor-full.min.js"></script>
+	<!-- tui editor end -->
+	 
 	<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/resources/css/board.css">
 </head> 
@@ -29,7 +40,8 @@
 			</div>
 			<div class="form-group">
 				<label >본문</label>
-				<textarea class="form-control" id="content" rows="5"><%= board.getContent() %></textarea>
+				<!-- <textarea class="form-control" id="content" rows="5"><%= board.getContent() %></textarea> -->
+				<div id="editorSection"></div>
 			</div>
 		</form>
 		<button class="btn btn-primary" onclick="updateBoard(<%=board.getId() %>)">방명록 수정하기</button>
